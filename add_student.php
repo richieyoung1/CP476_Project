@@ -20,9 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt2->bind_param("ssdddd", $student_id, $course, $test1, $test2, $test3, $final_exam);
 
     if ($stmt1->execute() && $stmt2->execute()) {
-        echo "✅ Student added successfully! <a href='manage_students.php'>Go back</a>";
+        echo "Student added successfully! <a href='manage_students.php'>Go back</a>";
     } else {
-        echo "❌ Failed to add student.";
+        echo "Failed to add student.";
     }
     $stmt1->close();
     $stmt2->close();
@@ -47,16 +47,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" name="course" required><br>
 
         <label>Test 1:</label>
-        <input type="number" step="0.01" name="test1" required><br>
+        <input type="number" step="1.0" name="test1" required><br>
 
         <label>Test 2:</label>
-        <input type="number" step="0.01" name="test2" required><br>
+        <input type="number" step="1.0" name="test2" required><br>
 
         <label>Test 3:</label>
-        <input type="number" step="0.01" name="test3" required><br>
+        <input type="number" step="1.0" name="test3" required><br>
 
         <label>Final Exam:</label>
-        <input type="number" step="0.01" name="final_exam" required><br>
+        <input type="number" step="1.0" name="final_exam" required><br>
 
         <button type="submit">Add Student</button>
     </form>

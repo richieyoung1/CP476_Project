@@ -64,6 +64,6 @@ $result = $conn->query($sql);
         <?php } ?>
     </table>
     <br>
-    <a href="manage_students.php">🔙 Back to Student Management</a>
+    <a href="manage_students.php"> Back to Student Management</a>
 </body>
 </html>

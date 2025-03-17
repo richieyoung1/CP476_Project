@@ -19,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ss", $username, $password);
         
         if ($stmt->execute()) {
-            echo "✅ Registration successful! You can now <a href='login.php'>log in</a>.";
+            echo "Registration successful! You can now <a href='login.php'>log in</a>.";
         } else {
-            echo "❌ Registration failed. Try again.";
+            echo "Registration failed. Try again.";
         }
         $stmt->close();
     }

@@ -26,8 +26,8 @@ $result = $conn->query("
 </head>
 <body>
     <h2>Student Management</h2>
-    <a href="add_student.php">➕ Add New Student</a>
-    <a href="calculate_grades.php">📊 Calculate Final Grades</a>
+    <a href="add_student.php"> Add New Student</a>
+    <a href="calculate_grades.php"> Calculate Final Grades</a>
 
     <br><br>
 
