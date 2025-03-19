@@ -3,15 +3,15 @@
 session_start();
 include 'db_connect.php';
 
-// Redirect if user is not logged in
+// make sure user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// Fetch student data with their grades
+// fetch student data and their grades
 $sql = "
-    SELECT n.student_id, n.student_name, c.course_code, 
+SELECT n.student_id, n.student_name, c.course_code, 
            c.test1, c.test2, c.test3, c.final_exam
     FROM name_table n
     JOIN course_table c ON n.student_id = c.student_id
@@ -36,7 +36,7 @@ $result = $conn->query($sql);
             text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color:rgb(162, 153, 224);
         }
     </style>
 </head>
@@ -50,7 +50,7 @@ $result = $conn->query($sql);
             <th>Final Grade</th>
         </tr>
         <?php while ($row = $result->fetch_assoc()) { 
-            // Calculate final grade
+            // calculate final grade
             $final_grade = ($row['test1'] * 0.20) + 
                            ($row['test2'] * 0.20) + 
                            ($row['test3'] * 0.20) + 

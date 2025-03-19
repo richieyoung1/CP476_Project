@@ -5,16 +5,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash password for security
 
-    // Check if username already exists
+    // check if username already exists
     $checkUser = $conn->prepare("SELECT id FROM users WHERE username = ?");
     $checkUser->bind_param("s", $username);
     $checkUser->execute();
     $checkUser->store_result();
 
     if ($checkUser->num_rows > 0) {
-        echo "❌ Username already exists. Choose a different one.";
+        echo  "Username already exists. Choose a different one.";
     } else {
-        // Insert user into the database
+        // insert user into the database
         $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
         $stmt->bind_param("ss", $username, $password);
         

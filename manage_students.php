@@ -3,13 +3,13 @@
 session_start();
 include 'db_connect.php';
 
-// Redirect to login if not logged in
+// make sure user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// Fetch all students
+// fetch all students
 $result = $conn->query("
     SELECT n.student_id, n.student_name, c.course_code, 
            c.test1, c.test2, c.test3, c.final_exam

@@ -13,14 +13,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $test3 = $_POST['test3'];
     $final_exam = $_POST['final_exam'];
 
-    // Insert into name_table
+    // insert into name_table
     $stmt1 = $conn->prepare("INSERT INTO name_table (student_id, student_name) VALUES (?, ?)");
     $stmt1->bind_param("ss", $student_id, $name);
     
-    // Insert into course_table
+    // insert into course_table
     $stmt2 = $conn->prepare("INSERT INTO course_table (student_id, course_code, test1, test2, test3, final_exam) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt2->bind_param("ssdddd", $student_id, $course, $test1, $test2, $test3, $final_exam);
 
+    //check outcome
     if ($stmt1->execute() && $stmt2->execute()) {
         echo "Student added successfully! <a href='manage_students.php'>Go back</a>";
     } else {

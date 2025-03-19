@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Check if the user exists
+    // check if the user exists
     $stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -16,11 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_result($id, $hashed_password);
         $stmt->fetch();
 
-        // Verify password
+        // verify password
         if (password_verify($password, $hashed_password)) {
             $_SESSION['user_id'] = $id;
             $_SESSION['username'] = $username;
-            header("Location: dashboard.php"); // Redirect to dashboard after login
+            header("Location: dashboard.php"); // got to dashboard after login
             exit();
         } else {
             echo " Incorrect password!";

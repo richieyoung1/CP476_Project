@@ -3,7 +3,7 @@
 session_start();
 include 'db_connect.php';
 
-// Redirect to login if user is not authenticated
+// make sure user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -15,7 +15,7 @@ if (!$student_id) {
     die("Invalid student ID.");
 }
 
-// Fetch student data
+// fetch student data
 $stmt = $conn->prepare("
     SELECT n.student_id, n.student_name, c.course_code, 
            c.test1, c.test2, c.test3, c.final_exam
@@ -36,11 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $test3 = $_POST['test3'];
     $final_exam = $_POST['final_exam'];
 
-    // Update name_table
+    // update name_table
     $stmt1 = $conn->prepare("UPDATE name_table SET student_name=? WHERE student_id=?");
     $stmt1->bind_param("ss", $name, $student_id);
 
-    // Update course_table
+    // update course_table
     $stmt2 = $conn->prepare("UPDATE course_table SET course_code=?, test1=?, test2=?, test3=?, final_exam=? WHERE student_id=?");
     $stmt2->bind_param("sdddds", $course, $test1, $test2, $test3, $final_exam, $student_id);
 

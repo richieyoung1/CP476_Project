@@ -1,12 +1,12 @@
 <?php include 'navigation_bar.php'; ?>
 <?php
-include 'db_connect.php'; // Ensure database connection is included
+include 'db_connect.php'; // db connection
 
-// Fetch available courses for the dropdown
+// select available courses for the dropdown
 $courseQuery = "SELECT DISTINCT course_code FROM course_table";
 $courseResult = $conn->query($courseQuery);
 
-// Get search parameters
+// get search parameters
 $searchQuery = isset($_GET['query']) ? trim($_GET['query']) : '';
 $selectedCourse = isset($_GET['course']) ? trim($_GET['course']) : '';
 
@@ -79,9 +79,9 @@ $result = $stmt->get_result();
                         <td><?php echo htmlspecialchars($row['final_exam']); ?></td>
                         <td>
                             <?php
-                            // Calculate final grade based on formula
+                            // calculate final grade based on formula
                             $finalGrade = ($row['test1'] * 0.20) + ($row['test2'] * 0.20) + ($row['test3'] * 0.20) + ($row['final_exam'] * 0.40);
-                            echo round($finalGrade, 2); // Display final grade rounded to 2 decimal places
+                            echo round($finalGrade, 2); // final grade rounded to 2 decimal places
                             ?>
                         </td>
                     </tr>
