@@ -1,3 +1,4 @@
+<?php include 'navigation_bar.php'; ?>
 <?php
 include 'db_connect.php'; // Ensure database connection is included
 

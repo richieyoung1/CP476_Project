@@ -1,3 +1,4 @@
+<?php include 'navigation_bar.php'; ?>
 <?php
 session_start();
 include 'db_connect.php';
@@ -23,9 +24,9 @@ if ($student_id) {
     $stmt2->execute();
 
     if ($stmt1->affected_rows > 0 || $stmt2->affected_rows > 0) {
-        echo "✅ Student deleted successfully! <a href='manage_students.php'>Go back</a>";
+        echo "Student deleted successfully! <a href='manage_students.php'>Go back</a>";
     } else {
-        echo "❌ Deletion failed. Student may not exist.";
+        echo "Deletion failed. Student may not exist.";
     }
 
     $stmt1->close();

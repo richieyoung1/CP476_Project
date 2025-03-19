@@ -1,3 +1,4 @@
+<?php include 'navigation_bar.php'; ?>
 <?php
 session_start();
 include 'db_connect.php';
@@ -44,9 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt2->bind_param("sdddds", $course, $test1, $test2, $test3, $final_exam, $student_id);
 
     if ($stmt1->execute() && $stmt2->execute()) {
-        echo "✅ Student updated successfully! <a href='manage_students.php'>Go back</a>";
+        echo "Student updated successfully! <a href='manage_students.php'>Go back</a>";
     } else {
-        echo "❌ Update failed.";
+        echo "Update failed.";
     }
 
     $stmt1->close();
