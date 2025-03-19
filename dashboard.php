@@ -24,5 +24,9 @@ echo "<a href='logout.php'>Logout</a>";
     <a href="logout.php">
         <button> Logout</button>
     </a>
+    <a href="search_student.php">
+    <button> Search Students</button>
+</a>
+
 </body>
 </html>

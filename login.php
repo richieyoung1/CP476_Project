@@ -23,10 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: dashboard.php"); // Redirect to dashboard after login
             exit();
         } else {
-            echo "❌ Incorrect password!";
+            echo " Incorrect password!";
         }
     } else {
-        echo "❌ User not found!";
+        echo " User not found!";
     }
     $stmt->close();
 }

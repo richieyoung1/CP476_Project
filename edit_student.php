@@ -69,16 +69,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" name="course" value="<?php echo $student['course_code']; ?>" required><br>
 
         <label>Test 1:</label>
-        <input type="number" step="0.01" name="test1" value="<?php echo $student['test1']; ?>" required><br>
+        <input type="number" step="1.0" name="test1" value="<?php echo $student['test1']; ?>" required><br>
 
         <label>Test 2:</label>
-        <input type="number" step="0.01" name="test2" value="<?php echo $student['test2']; ?>" required><br>
+        <input type="number" step="1.0" name="test2" value="<?php echo $student['test2']; ?>" required><br>
 
         <label>Test 3:</label>
-        <input type="number" step="0.01" name="test3" value="<?php echo $student['test3']; ?>" required><br>
+        <input type="number" step="1.0" name="test3" value="<?php echo $student['test3']; ?>" required><br>
 
         <label>Final Exam:</label>
-        <input type="number" step="0.01" name="final_exam" value="<?php echo $student['final_exam']; ?>" required><br>
+        <input type="number" step="1.0" name="final_exam" value="<?php echo $student['final_exam']; ?>" required><br>
 
         <button type="submit">Update Student</button>
     </form>
