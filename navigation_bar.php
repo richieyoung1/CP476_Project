@@ -74,14 +74,14 @@ if (!isset($_SESSION['user_id'])) {
 
 <div class="navbar">
     <div class="nav-links">
-        <a href="dashboard.php">🏠 Home</a>
-        <a href="add_student.php">➕ Add Student</a>
-        <a href="manage_students.php">📋 Manage Students</a>
-        <a href="search_student.php">🔍 Search Students</a>
+        <a href="dashboard.php"> Home</a>
+        <a href="add_student.php"> Add Student</a>
+        <a href="manage_students.php"> Manage Students</a>
+        <a href="search_student.php"> Search Students</a>
     </div>
     <div class="user-info">
-    👤 <?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : "Guest" ?> |
-    <span class="logout-btn"><a href="logout.php">🚪 Log Out</a></span>
+     <?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : "Guest" ?> |
+    <span class="logout-btn"><a href="logout.php"> Log Out</a></span>
 </div>
 </div>
 
