@@ -34,62 +34,105 @@ $result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Search Student</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            margin: auto;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        input, select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #0366d6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #024ea2;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: white;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #0366d6;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <h2>Search for a Student</h2>
-    <form method="GET" action="">
-        <input type="text" name="query" placeholder="Enter Student ID or Name" value="<?php echo htmlspecialchars($searchQuery); ?>">
+
+<h2 style="text-align:center;">Search Students</h2>
+
+<div class="container">
+    <!-- Search Form -->
+    <form method="GET" action="search_student.php" class="search-bar">
+        <input type="text" name="query" placeholder="Search by Student ID or Name..." value="<?= htmlspecialchars($searchQuery) ?>">
         <select name="course">
             <option value="">All Courses</option>
-            <?php while ($courseRow = $courseResult->fetch_assoc()): ?>
-                <option value="<?php echo htmlspecialchars($courseRow['course_code']); ?>" 
-                    <?php echo ($selectedCourse == $courseRow['course_code']) ? 'selected' : ''; ?>>
-                    <?php echo htmlspecialchars($courseRow['course_code']); ?>
+            <?php while ($row = $courseResult->fetch_assoc()): ?>
+                <option value="<?= $row['course_code'] ?>" <?= ($selectedCourse == $row['course_code']) ? 'selected' : '' ?>>
+                    <?= $row['course_code'] ?>
                 </option>
             <?php endwhile; ?>
         </select>
-        <button type="submit">Search</button>
+        <button type="submit"> Search</button>
     </form>
 
-    <?php if ($result !== null): ?>
-        <h3>Results:</h3>
-        <?php if ($result->num_rows > 0): ?>
-            <table border="1">
-                <tr>
-                    <th>Student ID</th>
-                    <th>Name</th>
-                    <th>Course</th>
-                    <th>Test 1</th>
-                    <th>Test 2</th>
-                    <th>Test 3</th>
-                    <th>Final Exam</th>
-                    <th>Final Grade</th>
-                </tr>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($row['student_id']); ?></td>
-                        <td><?php echo htmlspecialchars($row['student_name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['course_code']); ?></td>
-                        <td><?php echo htmlspecialchars($row['test1']); ?></td>
-                        <td><?php echo htmlspecialchars($row['test2']); ?></td>
-                        <td><?php echo htmlspecialchars($row['test3']); ?></td>
-                        <td><?php echo htmlspecialchars($row['final_exam']); ?></td>
-                        <td>
-                            <?php
-                            // calculate final grade based on formula
-                            $finalGrade = ($row['test1'] * 0.20) + ($row['test2'] * 0.20) + ($row['test3'] * 0.20) + ($row['final_exam'] * 0.40);
-                            echo round($finalGrade, 2); // final grade rounded to 2 decimal places
-                            ?>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </table>
-        <?php else: ?>
-            <p>No student found.</p>
-        <?php endif; ?>
-    <?php endif; ?>
+    <!-- Results Table -->
+    <table>
+        <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Test 1</th>
+            <th>Test 2</th>
+            <th>Test 3</th>
+            <th>Final Exam</th>
+        </tr>
+        <?php while ($row = $result->fetch_assoc()): ?>
+        <tr>
+            <td><?= htmlspecialchars($row['student_id']) ?></td>
+            <td><?= htmlspecialchars($row['student_name']) ?></td>
+            <td><?= htmlspecialchars($row['course_code'] ?? 'N/A') ?></td>
+            <td><?= $row['test1'] !== null ? htmlspecialchars($row['test1']) : 'N/A' ?></td>
+            <td><?= $row['test2'] !== null ? htmlspecialchars($row['test2']) : 'N/A' ?></td>
+            <td><?= $row['test3'] !== null ? htmlspecialchars($row['test3']) : 'N/A' ?></td>
+            <td><?= $row['final_exam'] !== null ? htmlspecialchars($row['final_exam']) : 'N/A' ?></td>
+        </tr>
+        <?php endwhile; ?>
+    </table>
+</div>
+
 </body>
 </html>

@@ -56,32 +56,96 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Student</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        input[type="text"], input[type="number"] {
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .button-container button, .button-container a {
+            width: 48%;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .update-btn {
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .update-btn:hover {
+            background-color: darkblue;
+        }
+        .cancel-btn {
+            background-color: gray;
+            color: white;
+        }
+        .cancel-btn:hover {
+            background-color: darkgray;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h2>Edit Student</h2>
-    <form method="POST">
-        <label>Name:</label>
-        <input type="text" name="name" value="<?php echo $student['student_name']; ?>" required><br>
 
-        <label>Course:</label>
-        <input type="text" name="course" value="<?php echo $student['course_code']; ?>" required><br>
+<h2>Edit Student</h2>
 
-        <label>Test 1:</label>
-        <input type="number" step="1.0" name="test1" value="<?php echo $student['test1']; ?>" required><br>
+<div class="container">
+    <?= $message ?? '' ?>
 
-        <label>Test 2:</label>
-        <input type="number" step="1.0" name="test2" value="<?php echo $student['test2']; ?>" required><br>
+    <form action="edit_student.php?id=<?= htmlspecialchars($student_id) ?>" method="POST">
+        <input type="text" name="name" placeholder="Student Name" value="<?= htmlspecialchars($student['student_name']) ?>" required>
+        <input type="text" name="course" placeholder="Course Code" value="<?= htmlspecialchars($student['course_code']) ?>" required>
+        <input type="number" name="test1" placeholder="Test 1 Score" min="0" max="100" value="<?= htmlspecialchars($student['test1']) ?>">
+        <input type="number" name="test2" placeholder="Test 2 Score" min="0" max="100" value="<?= htmlspecialchars($student['test2']) ?>">
+        <input type="number" name="test3" placeholder="Test 3 Score" min="0" max="100" value="<?= htmlspecialchars($student['test3']) ?>">
+        <input type="number" name="final_exam" placeholder="Final Exam Score" min="0" max="100" value="<?= htmlspecialchars($student['final_exam']) ?>">
 
-        <label>Test 3:</label>
-        <input type="number" step="1.0" name="test3" value="<?php echo $student['test3']; ?>" required><br>
-
-        <label>Final Exam:</label>
-        <input type="number" step="1.0" name="final_exam" value="<?php echo $student['final_exam']; ?>" required><br>
-
-        <button type="submit">Update Student</button>
+        <div class="button-container">
+            <button type="submit" class="update-btn">Update Student</button>
+            <a href="manage_students.php" class="cancel-btn">Cancel</a>
+        </div>
     </form>
+</div>
+
 </body>
 </html>
