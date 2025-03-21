@@ -87,7 +87,7 @@ $total_courses = $total_courses_result->fetch_assoc()['total_courses'];
     </div>
 </div>
 <div style="text-align: center;">
-    <a href="download_report.php" class="download-button">Download Student Report</a>
+    <a href="download.php" class="download-button">Download Student Report</a>
 </div>
 
 

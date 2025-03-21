@@ -2,17 +2,20 @@
 session_start();
 include 'db_connect.php';
 
-// Only allow logged in users
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// Set headers to force text file download
 header('Content-Type: text/plain');
-header('Content-Disposition: attachment; filename="student_report.txt"');
+header('Content-Disposition: attachment; filename="students_file.txt"');
 
-// Fetch data from joined tables
+
+// column titles with fixed widths
+printf("%-13s %-20s %-13s %s\n", "Student ID", "Student Name", "Course Code", "Final Grade");
+echo str_repeat("-", 60) . "\n";
+
+
 $sql = "SELECT n.student_id, n.student_name, c.course_code, 
                c.test1, c.test2, c.test3, c.final_exam
         FROM name_table n
@@ -21,19 +24,22 @@ $sql = "SELECT n.student_id, n.student_name, c.course_code,
 
 $result = $conn->query($sql);
 
-// Print formatted data (similar to Appendix B)
-echo "STUDENT RECORD REPORT\n";
-echo "======================\n\n";
-
+// output data with alignment
 while ($row = $result->fetch_assoc()) {
-    echo "Student ID: " . $row['student_id'] . "\n";
-    echo "Name: " . $row['student_name'] . "\n";
-    echo "Course: " . $row['course_code'] . "\n";
-    echo "Test 1: " . $row['test1'] . "\n";
-    echo "Test 2: " . $row['test2'] . "\n";
-    echo "Test 3: " . $row['test3'] . "\n";
-    echo "Final Exam: " . $row['final_exam'] . "\n";
-    echo "------------------------------\n";
+    $test1 = (float) $row['test1'];
+    $test2 = (float) $row['test2'];
+    $test3 = (float) $row['test3'];
+    $final_exam = (float) $row['final_exam'];
+
+    $final_grade = ($test1 * 0.2) + ($test2 * 0.2) + ($test3 * 0.2) + ($final_exam * 0.4);
+
+    printf(
+        "%-13s %-20s %-13s %.1f\n",
+        $row['student_id'],
+        $row['student_name'],
+        $row['course_code'],
+        $final_grade
+    );
 }
 
 $conn->close();
