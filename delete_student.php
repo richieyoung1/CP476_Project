@@ -1,7 +1,7 @@
-<?php include 'navigation_bar.php'; ?>
 <?php
 session_start();
 include 'db_connect.php';
+include 'navigation_bar.php';
 
 // make sure user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -10,7 +10,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // get the student ID from the URL
-$student_id = $_GET['id'] ?? null;
+$student_id = $_GET['delete_id'] ?? null;
+
 
 if ($student_id) {
     // delete from course_table first (to avoid foreign key constraint issues)

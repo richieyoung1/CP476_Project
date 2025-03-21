@@ -101,8 +101,8 @@ $result = $conn->query("
             <td><?= $row['test3'] !== null ? htmlspecialchars($row['test3']) : 'N/A' ?></td>
             <td><?= $row['final_exam'] !== null ? htmlspecialchars($row['final_exam']) : 'N/A' ?></td>
             <td>
-                <a href="edit_student.php?id=<?= $row['student_id'] ?>" class="action-btn edit-btn">✏ Edit</a>
-                <a href="manage_students.php?delete_id=<?= $row['student_id'] ?>" class="action-btn delete-btn" onclick="return confirm('Are you sure?')">🗑 Delete</a>
+                <a href="edit_student.php?id=<?= $row['student_id'] ?>" class="action-btn edit-btn"> Edit</a>
+                <a href="delete_student.php?delete_id=<?= $row['student_id'] ?>" class="action-btn delete-btn" > Delete</a>
             </td>
         </tr>
         <?php endwhile; ?>

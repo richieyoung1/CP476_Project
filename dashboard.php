@@ -32,10 +32,16 @@ $total_courses = $total_courses_result->fetch_assoc()['total_courses'];
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
         }
         .dashboard-container {
             display: flex;
+            justify-content: center;
             gap: 20px;
+            margin-top: 30px;
         }
         .card {
             background: white;
@@ -46,14 +52,27 @@ $total_courses = $total_courses_result->fetch_assoc()['total_courses'];
             width: 200px;
         }
         .card h2 {
-            margin: 0;
-            color: blue;
+            margin-bottom: 10px;
+            color: #0366d6;
+        }
+        .download-button {
+            display: inline-block;
+            margin: 30px auto 0;
+            background-color: darkorange;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .download-button:hover {
+            background-color: orangered;
         }
     </style>
 </head>
 <body>
 
-<?php include 'navigation_bar.php'; ?>
 
 <h1>Welcome, <?= htmlspecialchars($_SESSION['username']) ?>!</h1>
 
@@ -67,6 +86,10 @@ $total_courses = $total_courses_result->fetch_assoc()['total_courses'];
         <p><?= $total_courses ?></p>
     </div>
 </div>
+<div style="text-align: center;">
+    <a href="download_report.php" class="download-button">Download Student Report</a>
+</div>
+
 
 </body>
 </html>
